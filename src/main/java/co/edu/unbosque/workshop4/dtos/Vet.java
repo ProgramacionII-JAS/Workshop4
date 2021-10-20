@@ -7,7 +7,7 @@ public class Vet {
     private String address;
     private String neighborhood;
 
-    public Vet(String userName, String name, String address, String neighborhood){
+    public Vet(String userName, String name, String address, String neighborhood) {
         this.userName = userName;
         this.name = name;
         this.address = address;

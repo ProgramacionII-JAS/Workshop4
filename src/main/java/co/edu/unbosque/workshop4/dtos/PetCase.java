@@ -9,7 +9,7 @@ public class PetCase {
     private String vetId;
     private int petId;
 
-    public PetCase(int caseId,String createAt,String type,String description,String vetId,int petId){
+    public PetCase(int caseId, String createAt, String type, String description, String vetId, int petId) {
         this.caseId = caseId;
         this.createAt = createAt;
         this.type = type;
