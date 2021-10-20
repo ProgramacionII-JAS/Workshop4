@@ -1,0 +1,144 @@
+CREATE TABLE UserApp(
+	username VARCHAR NOT NULL,
+	password VARCHAR NOT NULL,
+	email VARCHAR NOT NULL,
+	role VARCHAR NOT NULL,
+	PRIMARY KEY (username)
+);
+
+CREATE TABLE Owner (
+	username VARCHAR NOT NULL,
+	person_id INT NOT NULL,
+	name VARCHAR NOT NULL,
+	address VARCHAR NOT NULL,
+	neighborhood VARCHAR NOT NULL,
+	UNIQUE(person_id),
+	PRIMARY KEY (username),
+	FOREIGN KEY (username)
+		REFERENCES UserApp (username)
+);
+
+CREATE TABLE Official (
+	username VARCHAR NOT NULL,
+	name VARCHAR NOT NULL,
+	PRIMARY KEY (username),
+	FOREIGN KEY (username)
+		REFERENCES UserApp (username)
+);
+
+CREATE TABLE Vet (
+	username VARCHAR NOT NULL,
+	name VARCHAR NOT NULL,
+	address VARCHAR NOT NULL,
+	neighborhood VARCHAR NOT NULL,
+	UNIQUE(name),
+	PRIMARY KEY (username),
+	FOREIGN KEY (username)
+		REFERENCES UserApp (username)
+);
+
+CREATE TABLE Pet (
+	pet_id INT NOT NULL,
+	microchip VARCHAR NOT NULL,
+	name VARCHAR NOT NULL,
+	species VARCHAR NOT NULL,
+	race VARCHAR NOT NULL,
+	size VARCHAR NOT NULL,
+	sex VARCHAR NOT NULL,
+	picture VARCHAR NOT NULL,
+	owner_id INT NOT NULL,
+	PRIMARY KEY (pet_id),
+	FOREIGN KEY (owner_id)
+		REFERENCES Owner (person_id)
+);
+
+CREATE TABLE Visit (
+	visit_id INT NOT NULL,
+	created_at VARCHAR NOT NULL,
+	type VARCHAR NOT NULL,
+	description VARCHAR NOT NULL,
+	vet_id VARCHAR NOT NULL,
+	pet_id INT NOT NULL,
+	PRIMARY KEY (visit_id),
+	FOREIGN KEY (vet_id)
+		REFERENCES Vet (name),
+	FOREIGN KEY (pet_id)
+		REFERENCES Pet (pet_id)
+);
+
+CREATE TABLE PetCase (
+	case_id INT NOT NULL,
+	created_at VARCHAR NOT NULL,
+	"type" VARCHAR NOT NULL,
+	description VARCHAR NOT NULL,
+	pet_id INT NOT NULL,
+	PRIMARY KEY (case_id),
+	FOREIGN KEY (pet_id)
+		REFERENCES Pet (pet_id)
+);
+
+INSERT INTO UserApp (username, password, email, role)
+VALUES 
+('osflorez', '12345', 'osflorez@gmail.com', 'funcionario'),
+('anPerez', '12345', 'anperez@gmail.com', 'funcionario'),
+('jsVargas', '12345', 'jsVargas@gmail.com', 'funcionario'),
+('dPerdigon21', '12345', 'dPerdigon@gmail.com', 'funcionario'),
+('aClevesA', '12345', 'aClevesA@gmail.com', 'funcionario'),
+('MarioR01', '12345', 'MarioR01@gmail.com', 'propietario'),
+('gabiG01', '12345', 'gabiG01@gmail.com', 'propietario'),
+('julioJ01', '12345', 'julioJ01@gmail.com', 'propietario'),
+('aSanchezR01', '12345', 'aSanchezR01@gmail.com', 'propietario'),
+('alejaM01', '12345', 'alejaM01@gmail.com', 'propietario'),
+('b_pitt', '12345', 'b_pitt@gmail.com', 'veterinario'),
+('kim_k', '12345', 'kim_k@gmail.com', 'veterinario'),
+('fercho_f', '12345', 'fercho_f@gmail.com', 'veterinario'),
+('pati123', '12345', 'pati123@gmail.com', 'veterinario'),
+('alexa_R', '12345', 'alexa_R@gmail.com', 'veterinario');
+
+INSERT INTO Owner (username, person_id, name, address, neighborhood)
+VALUES 
+('MarioR01', 12345, 'Mario Romero', 'Calle 12 # 122-02', 'Kennedy'),
+('gabiG01', 0987, 'Gabriela Guevara', 'Calle 13 # 123-03', 'Quinta Paredes'),
+('julioJ01', 2345, 'Julio Jaramillo', 'Carrera 14 #124-04', 'Chapinero'),
+('aSanchezR01', 9876, 'Andres Sanchez', 'Calle 15 #125-05', 'Las Cruces'),
+('alejaM01', 3456, 'Alejandra Martinez', 'Carrera 16 # 126-06', 'Salitre');
+
+INSERT INTO Official (username, name)
+VALUES 
+('osflorez', 'Oscar Florez'),
+('anPerez', 'Ana Perez'),
+('jsVargas', 'Juan Vargas'),
+('dPerdigon21', 'Deivid Perdigon'),
+('aClevesA', 'Antonio Cleves');
+
+INSERT INTO Vet (username, name, address, neighborhood)
+VALUES 
+('b_pitt', 'Brad Pitt', 'Calle 4 # 12A-122', 'Antes del Peaje'),
+('kim_k', 'Kim Kardashian', 'Calle 3 # 13-123', 'Soacha'),
+('fercho_f', 'Fernando Fonseca', 'Carrera 2 # 13A-124', 'Salitre'),
+('pati123', 'Patricia Fernandez', 'Carrera 3 # 11A-60', 'La Calera'),
+('alexa_R', 'Alexandra Ramirez', 'Carrera 72 # 13-2', 'Chapinero');
+
+INSERT INTO Pet (pet_id, microchip, name, species, race, size, sex, picture, owner_id)
+VALUES
+(1, '11111', 'Max', 'Perro', 'Border Collie', 'Mediano', 'Macho', 'Max.jpg', 12345),
+(2, '12222', 'Buddy', 'Perro', 'Golden Retriever', 'Grande', 'Macho', 'Leon.png', 0987),
+(3, '12333', 'Maya', 'Gato', 'Ragdoll', 'Pequeño', 'Hembra', 'Maya.jpg', 2345),
+(4, '12344', 'Balto', 'Perro', 'Husky', 'Grande', 'Macho', 'Balto.jpg', 9876),
+(5, '12345', 'Michi', 'Gato', 'Bengala', 'Pequeño', 'Hembra', 'Michi.jpg', 3456);
+
+INSERT INTO Visit (visit_id, created_at, type, description, vet_id, pet_id)
+VALUES
+(1, '22-04-17', 'Control', '...', 'Brad Pitt', '1'),
+(2, '12/12/20', 'Control', '...', 'Kim Kardashian', '2'),
+(3, '17/05/17', 'Control', '...', 'Fernando Fonseca', '3'),
+(4, '26/08/18', 'Control', '...', 'Patricia Fernandez', '4'),
+(5, '04/09/20', 'Control', '...', 'Alexandra Ramirez', '5');
+
+INSERT INTO PetCase (case_id, created_at, type, description, pet_id)
+VALUES
+(1, '30-04-19', 'Fallecida', '...', '1'),
+(2, '31-01-21', 'Perdida', '...', '2'),
+(3, '10-04-18', 'Robada', '...', '3'),
+(4, '26-12-19', 'Robada', '...', '4'),
+(5, '04-11-20', 'Perdida', '...', '5');
