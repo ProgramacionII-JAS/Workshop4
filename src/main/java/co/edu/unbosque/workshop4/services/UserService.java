@@ -24,7 +24,7 @@ public class UserService {
         try {
             System.out.println("Enviando Lista Usuarios...");
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM UserApp WHERE role = '" + roles + "';";
+            String sql = "SELECT * FROM UserApp WHERE role = '" + roles + "'";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {

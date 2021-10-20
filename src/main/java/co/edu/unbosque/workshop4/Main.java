@@ -18,24 +18,25 @@ public class Main {
     private static String user = "postgres";
     private static String password = "12345";
 
-    private static Scanner sc = new Scanner(System.in);
+    private static Scanner sc;
 
     public static void main(String[] args) {
+        sc = new Scanner(System.in);
         Connection con = null;
 
         try {
 
             Class.forName(jdbcDriver);
-            con = DriverManager.getConnection(db, user, password);
+
             System.out.println("Conectando con el Servidor...");
 
-            String menu = "Ciudadanos de 4 Patas \n" +
+            String menu = "===================================\n"+"Ciudadanos de 4 Patas \n" +
                     "1. Consultar la lista de usuarios registrados para un rol dado.\n" +
                     "2. Contar la lista de veterinarias registradas en la plataforma.\n" +
                     "3. Consultar las visitas que se han registrado para un ID de mascota dado.\n" +
                     "4. Registrar un nuevo caso de robo de una mascota dado su ID.\n" +
                     "5. Salir\n" +
-                    "Ingrese la opción deseada:";
+                    "Ingrese la opción deseada:\n"+"===================================";
             boolean bandera = true;
 
             while (bandera) {
@@ -43,13 +44,15 @@ public class Main {
                 int option = sc.nextInt();
                 switch (option) {
                     case 1:
-                        UserService uService = new UserService(con);
                         System.out.println("Ingrese Rol a consultar");
                         String rol = sc.next();
+                        con = DriverManager.getConnection(db, user, password);
+                        UserService uService = new UserService(con);
                         uService.listUsers(rol);
                         con.close();
                         break;
                     case 2:
+                        con = DriverManager.getConnection(db, user, password);
                         VetService vService = new VetService(con);
                         vService.listVet();
                         con.close();
@@ -65,6 +68,15 @@ public class Main {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            // Cleaning-up environment
+            try {
+                if(con != null){
+                    con.close();
+                }
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
         }
 
 
