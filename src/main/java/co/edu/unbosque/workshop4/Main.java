@@ -2,6 +2,7 @@ package co.edu.unbosque.workshop4;
 
 import co.edu.unbosque.workshop4.services.UserService;
 import co.edu.unbosque.workshop4.services.VetService;
+import co.edu.unbosque.workshop4.services.VisitService;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -57,6 +58,17 @@ public class Main {
                         vService.listVet();
                         con.close();
                         break;
+
+                        case 3:
+                        System.out.println("Ingrese el ID de la mascota a consultar");
+                        int idPet = sc.nextInt();
+                        con = DriverManager.getConnection(db, user, password);
+
+                        VisitService visService = new VisitService(con);
+                        visService.listVisits(idPet);
+                        con.close();
+                        break;
+
                     case 5:
                         bandera = false;
                         System.out.println("Gracias por usar Ciudadanos de 4 Patas");
