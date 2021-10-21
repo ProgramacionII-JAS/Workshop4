@@ -71,6 +71,7 @@ public class Main {
                         visService.listVisits(idPet);
                         con.close();
                         break;
+                        
                     case 4:
                         Date fecha = new Date();
                         System.out.println("Ingrese Id de la mascota");

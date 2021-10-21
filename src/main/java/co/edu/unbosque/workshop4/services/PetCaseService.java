@@ -16,20 +16,22 @@ public class PetCaseService {
 
     public void InsertCase(PetCase p ){
         Statement stm = null;
+        Statement stm2 = null;
         try {
             stm = conn.createStatement();
+            stm2 = conn.createStatement();
             String sql2 = "SELECT COUNT(*) AS count FROM PetCase";
             ResultSet rs2 = stm.executeQuery(sql2);
             rs2.next();
             int numCases = rs2.getInt("count");
+            rs2.close();
+            stm.close();
             String sql = "INSERT INTO PetCase (case_id, created_at, type, description, pet_id) "+
                     "VALUES ("+(numCases + 1)+", '"+p.getCreateAt()+"', '" +
                     p.getType()+"', '"+p.getDescription()+"', '"+ p.getPetId()+"')";
-            stm.executeQuery(sql);
             System.out.println("Registro de caso exitoso");
-            rs2.close();
-            stm.close();
-
+            stm2.executeUpdate(sql);
+            stm2.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -37,6 +39,8 @@ public class PetCaseService {
             try {
                 if (stm != null) {
                     stm.close();
+                }else if(stm2 != null){
+                    stm2.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
