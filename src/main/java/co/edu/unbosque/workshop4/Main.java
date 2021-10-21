@@ -1,5 +1,7 @@
 package co.edu.unbosque.workshop4;
 
+import co.edu.unbosque.workshop4.dtos.PetCase;
+import co.edu.unbosque.workshop4.services.PetCaseService;
 import co.edu.unbosque.workshop4.services.UserService;
 import co.edu.unbosque.workshop4.services.VetService;
 import co.edu.unbosque.workshop4.services.VisitService;
@@ -7,6 +9,7 @@ import co.edu.unbosque.workshop4.services.VisitService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -66,6 +69,18 @@ public class Main {
 
                         VisitService visService = new VisitService(con);
                         visService.listVisits(idPet);
+                        con.close();
+                        break;
+                    case 4:
+                        Date fecha = new Date();
+                        System.out.println("Ingrese Id de la mascota");
+                        int id = sc.nextInt();
+                        System.out.println("Ingrese la descripcion del caso");
+                        String description = sc.next();
+                        con = DriverManager.getConnection(db, user, password);
+                        PetCase p = new PetCase(fecha.toString(),"robo",description, id);
+                        PetCaseService ps = new PetCaseService(con);
+                        ps.InsertCase(p);
                         con.close();
                         break;
 

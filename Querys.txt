@@ -38,7 +38,7 @@ CREATE TABLE Vet (
 );
 
 CREATE TABLE Pet (
-	pet_id INT NOT NULL,
+	pet_id SERIAL NOT NULL,
 	microchip VARCHAR NOT NULL,
 	name VARCHAR NOT NULL,
 	species VARCHAR NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE Visit (
 	type VARCHAR NOT NULL,
 	description VARCHAR NOT NULL,
 	vet_id VARCHAR NOT NULL,
-	pet_id INT NOT NULL,
+	pet_id SERIAL NOT NULL,
 	PRIMARY KEY (visit_id),
 	FOREIGN KEY (vet_id)
 		REFERENCES Vet (name),
@@ -67,11 +67,11 @@ CREATE TABLE Visit (
 );
 
 CREATE TABLE PetCase (
-	case_id INT NOT NULL,
+	case_id SERIAL NOT NULL,
 	created_at VARCHAR NOT NULL,
 	"type" VARCHAR NOT NULL,
 	description VARCHAR NOT NULL,
-	pet_id INT NOT NULL,
+	pet_id SERIAL NOT NULL,
 	PRIMARY KEY (case_id),
 	FOREIGN KEY (pet_id)
 		REFERENCES Pet (pet_id)
@@ -119,26 +119,26 @@ VALUES
 ('pati123', 'Patricia Fernandez', 'Carrera 3 # 11A-60', 'La Calera'),
 ('alexa_R', 'Alexandra Ramirez', 'Carrera 72 # 13-2', 'Chapinero');
 
-INSERT INTO Pet (pet_id, microchip, name, species, race, size, sex, picture, owner_id)
+INSERT INTO Pet (microchip, name, species, race, size, sex, picture, owner_id)
 VALUES
-(1, '11111', 'Max', 'Perro', 'Border Collie', 'Mediano', 'Macho', 'Max.jpg', 12345),
-(2, '12222', 'Buddy', 'Perro', 'Golden Retriever', 'Grande', 'Macho', 'Leon.png', 0987),
-(3, '12333', 'Maya', 'Gato', 'Ragdoll', 'Pequeño', 'Hembra', 'Maya.jpg', 2345),
-(4, '12344', 'Balto', 'Perro', 'Husky', 'Grande', 'Macho', 'Balto.jpg', 9876),
-(5, '12345', 'Michi', 'Gato', 'Bengala', 'Pequeño', 'Hembra', 'Michi.jpg', 3456);
+('11111', 'Max', 'Perro', 'Border Collie', 'Mediano', 'Macho', 'Max.jpg', 12345),
+('12222', 'Buddy', 'Perro', 'Golden Retriever', 'Grande', 'Macho', 'Leon.png', 0987),
+('12333', 'Maya', 'Gato', 'Ragdoll', 'Pequeño', 'Hembra', 'Maya.jpg', 2345),
+('12344', 'Balto', 'Perro', 'Husky', 'Grande', 'Macho', 'Balto.jpg', 9876),
+('12345', 'Michi', 'Gato', 'Bengala', 'Pequeño', 'Hembra', 'Michi.jpg', 3456);
 
-INSERT INTO Visit (visit_id, created_at, type, description, vet_id, pet_id)
+INSERT INTO Visit (visit_id, created_at, type, description, vet_id)
 VALUES
-(1, '22-04-17', 'Control', '...', 'Brad Pitt', '1'),
-(2, '12/12/20', 'Control', '...', 'Kim Kardashian', '2'),
-(3, '17/05/17', 'Control', '...', 'Fernando Fonseca', '3'),
-(4, '26/08/18', 'Control', '...', 'Patricia Fernandez', '4'),
-(5, '04/09/20', 'Control', '...', 'Alexandra Ramirez', '5');
+(1, '22-04-17', 'Control', '...', 'Brad Pitt'),
+(2, '12/12/20', 'Control', '...', 'Kim Kardashian'),
+(3, '17/05/17', 'Control', '...', 'Fernando Fonseca'),
+(4, '26/08/18', 'Control', '...', 'Patricia Fernandez'),
+(5, '04/09/20', 'Control', '...', 'Alexandra Ramirez');
 
-INSERT INTO PetCase (case_id, created_at, type, description, pet_id)
+INSERT INTO PetCase (created_at, type, description)
 VALUES
-(1, '30-04-19', 'Fallecida', '...', '1'),
-(2, '31-01-21', 'Perdida', '...', '2'),
-(3, '10-04-18', 'Robada', '...', '3'),
-(4, '26-12-19', 'Robada', '...', '4'),
-(5, '04-11-20', 'Perdida', '...', '5');
+('30-04-19', 'Fallecida', '...'),
+('31-01-21', 'Perdida', '...'),
+('10-04-18', 'Robada', '...'),
+('26-12-19', 'Robada', '...'),
+('04-11-20', 'Perdida', '...');
