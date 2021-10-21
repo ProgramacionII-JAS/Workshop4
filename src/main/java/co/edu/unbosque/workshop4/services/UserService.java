@@ -34,7 +34,7 @@ public class UserService {
                 String role = rs.getString("role");
                 users.add(new User(username, password, email, role));
             }
-            System.out.println("Email\tPassword\tRole");
+            System.out.println("User Name\tPassword\tEmail\tRole");
             for (User user : users) {
                 System.out.println(user.getUserName() + "\t" + user.getPassword() + "\t" + user.getEmail() + "\t" + user.getRole());
             }
