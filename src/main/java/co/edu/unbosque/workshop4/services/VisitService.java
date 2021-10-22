@@ -1,22 +1,33 @@
 package co.edu.unbosque.workshop4.services;
 
-import co.edu.unbosque.workshop4.dtos.User;
 import co.edu.unbosque.workshop4.dtos.Visit;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class    VisitService {
-
+/**
+ * @author Ana Perez
+ * Clase encargada de ejecutar query para posgreSQL para obtener los datos de la base de datos de la veterinaria
+ */
+public class VisitService {
+    /**
+     * Se inicializa la conexion a la base de datos
+     */
     private Connection conn;
-
+    /**
+     * Constructor de la clase
+     * @param conn recive la conexion a la base de datos establecida en donde se instancie la clase
+     */
     public VisitService(Connection conn) {
         this.conn = conn;
     }
-
+    /**
+     * Metodo que tiene la funcionalidad para obtener los datos de la base de datos de la tabla Visit
+     * dependiendo del id de la mascota recibido como parametro.
+     * @param idPett
+     */
     public void listVisits(int idPett) throws SQLException {
         Statement stmt = null;
 

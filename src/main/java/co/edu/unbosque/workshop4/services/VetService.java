@@ -8,14 +8,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * @author Santiago Flórez
+ * Clase encargada de ejecutar query para posgreSQL para obtener los datos de la base de datos de la veterinaria
+ */
 public class VetService {
-
+    /**
+     * Se inicializa la conexion a la base de datos
+     */
     private Connection conn;
-
+    /**
+     * Constructor de la clase
+     * @param conn recive la conexion a la base de datos establecida en donde se instancie la clase
+     */
     public VetService(Connection conn) {
         this.conn = conn;
     }
-
+    /**
+     * Metodo que tiene la funcionalidad para obtener los datos de la base de datos de la tabla Vet
+     */
     public void listVet() {
         Statement stmt = null;
 

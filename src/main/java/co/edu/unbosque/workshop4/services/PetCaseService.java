@@ -4,16 +4,29 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import co.edu.unbosque.workshop4.dtos.PetCase;
+
+/**
+ * @author Jauan Sebastian VArgas
+ * Clase encargada de ejecutar query para posgreSQL para obtener los datos de la base de datos
+ */
 public class PetCaseService {
-
+    /**
+     * Se inicializa la conexion a la base de datos
+     */
     private Connection conn;
-
+    /**
+     * Constructor de la clase
+     * @param conn recive la conexion a la base de datos establecida en donde se instancie la clase
+     */
     public PetCaseService(Connection conn) {
         this.conn = conn;
     }
-
+    /**
+     * Metodo que tiene la funcionalidad para agregar datos a la base de datos de la tabla PetCase
+     * recibido como parametro los datos que se van a agregar a la tabla.
+     * @param p
+     */
     public void InsertCase(PetCase p ){
         Statement stm = null;
         Statement stm2 = null;
